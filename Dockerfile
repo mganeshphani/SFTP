@@ -12,6 +12,14 @@ RUN apt-get update && \
     rm -f /etc/ssh/ssh_host_*key*
 
 COPY files/sshd_config /etc/ssh/sshd_config
+COPY files/ssh_host_ed25519_key /etc/ssh/ssh_host_ed25519_key
+RUN chmod 600 /etc/ssh/ssh_host_ed25519_key
+COPY files/ssh_host_ed25519_key.pub /etc/ssh/ssh_host_ed25519_key.pub
+RUN chmod 600 /etc/ssh/ssh_host_ed25519_key.pub
+COPY files/ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key
+RUN chmod 600 /etc/ssh/ssh_host_rsa_key
+COPY files/ssh_host_rsa_key.pub /etc/ssh/ssh_host_rsa_key.pub
+RUN chmod 600 /etc/ssh/ssh_host_rsa_key.pub
 COPY files/create-sftp-user /usr/local/bin/
 COPY files/entrypoint /
 
